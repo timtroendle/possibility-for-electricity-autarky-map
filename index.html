@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Possibility for electricity autarky in Europe</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        h2,
+        h3 {
+            margin: 10px;
+            font-size: 1.2em;
+        }
+
+        h3 {
+            font-size: 1em;
+        }
+
+        p {
+            font-size: 0.85em;
+            margin: 10px;
+            text-align: left;
+        }
+
+        /**
+* Create a position for the map
+* on the page */
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /**
+* Set rules for how the map overlays
+* (info box and legend) will be displayed
+* on the page. */
+        .map-overlay {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.8);
+            margin-right: 20px;
+            font-family: Arial, sans-serif;
+            overflow: auto;
+            border-radius: 3px;
+        }
+
+        #features {
+            top: 0;
+            height: 150px;
+            margin-top: 20px;
+            width: 250px;
+        }
+    </style>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+
+<body>
+    <div id='map'></div>
+    <div class='map-overlay' id='features'>
+        <h2>Electricity autarky</h2>
+        <div id='pd'>
+            <p>Hover over an administrative unit!</p>
+        </div>
+    </div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoidGltdHJvZW5kbGUiLCJhIjoiY2pxYXRvcHp0M2NidTN4cDMxdXdmZ2VpZSJ9.Yt-BUdLmsq9d4wjDxEWd_g';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/timtroendle/cjq6mz9h3amlg2smyae8db4py'
+        });
+        map.on('load', function() {
+            map.on('mousemove', function(e) {
+            var unit = map.queryRenderedFeatures(e.point, {
+                layers: ['europe', 'country', 'region', 'municipality']
+            });
+
+            if (unit.length > 0) {
+                document.getElementById('pd').innerHTML =
+                    '<h3><strong>' + unit[0].properties.name + '</strong></h3>' +
+                    '<p><strong><em>' + unit[0].properties.population_sum.toLocaleString('en', {maximumFractionDigits : 0}) + '</strong> people</em></p>' +
+                    '<p><strong><em>' + unit[0].properties.demand_twh_per_year.toLocaleString('en', {maximumFractionDigits : 1}) + '</strong> TWh electricity demand</em></p>' +
+                    '<p><strong><em>' + unit[0].properties.normed_potential.toLocaleString('en', {maximumFractionDigits : 2}) + '</strong> normed potential</em></p>';
+            } else {
+                document.getElementById('pd').innerHTML = '<p>Hover over an administrative unit!</p>';
+            }
+            });
+        });
+
+        map.getCanvas().style.cursor = 'default';
+        map.fitBounds([[-15.8, 30], [37, 72]]);
+    </script>
+</body>
+
+</html>
