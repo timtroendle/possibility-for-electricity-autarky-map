@@ -37,8 +37,8 @@
             <p>
                 This map visualises the possibility for renewable electricity autarky in Europe ---
                 for all municipalities, all regions, all countries, and all of Europe.
-                Areas shown in green might be able to become autarkic using renewable electricity.
-                Areas shown in red wont be able to become autarkic.
+                Having the possibility means being able to fulfill local electricity demand with
+                100% renewable electricity from wind and solar power generated locally.
             </p>
             <p>
                 Areas wont be able to become autarkic when their local electricity demand exceeds
@@ -78,11 +78,24 @@
             });
 
             if (unit.length > 0) {
+                var potential = unit[0].properties.offshore_wind_twh_per_year +
+                                unit[0].properties.onshore_wind_twh_per_year +
+                                unit[0].properties.rooftop_pv_twh_per_year +
+                                unit[0].properties.open_field_pv_twh_per_year
+                var statement = null
+                if (unit[0].properties.normed_potential < 1) {
+                    statement = "is impossible"
+                } else if (unit[0].properties.normed_potential < 10) {
+                    statement = "might be possible"
+                } else {
+                    statement = "is likely possible"
+                }
                 document.getElementById('pd').innerHTML =
-                    '<h3>' + unit[0].properties.name + '</h3>' +
+                    '<p>in <strong>' + unit[0].properties.name + '</strong> ' +
+                    statement + '.</p>' +
                     '<p><strong>' + unit[0].properties.population_sum.toLocaleString('en', {maximumFractionDigits : 0}) + '</strong> people<br>' +
                     '<strong>' + unit[0].properties.demand_twh_per_year.toLocaleString('en', {maximumFractionDigits : 1}) + '</strong> TWh/a electricity demand<br>' +
-                    '<strong>' + unit[0].properties.normed_potential.toLocaleString('en', {maximumFractionDigits : 2}) + '</strong> [-] renewable electricity potential<br>';
+                    '<strong>' + potential.toLocaleString('en', {maximumFractionDigits : 1}) + '</strong> TWh/a generation potential<br>';
             } else {
                 document.getElementById('pd').innerHTML = '<p>Hover over an area for details</p>';
             }
