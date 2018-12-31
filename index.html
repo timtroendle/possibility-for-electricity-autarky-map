@@ -82,7 +82,7 @@
                     '<h3>' + unit[0].properties.name + '</h3>' +
                     '<p><strong>' + unit[0].properties.population_sum.toLocaleString('en', {maximumFractionDigits : 0}) + '</strong> people<br>' +
                     '<strong>' + unit[0].properties.demand_twh_per_year.toLocaleString('en', {maximumFractionDigits : 1}) + '</strong> TWh/a electricity demand<br>' +
-                    '<strong>' + unit[0].properties.normed_potential.toLocaleString('en', {maximumFractionDigits : 2}) + '</strong> normed potential<br>';
+                    '<strong>' + unit[0].properties.normed_potential.toLocaleString('en', {maximumFractionDigits : 2}) + '</strong> [-] renewable electricity potential<br>';
             } else {
                 document.getElementById('pd').innerHTML = '<p>Hover over an area for details</p>';
             }
