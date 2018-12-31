@@ -79,10 +79,10 @@
 
             if (unit.length > 0) {
                 document.getElementById('pd').innerHTML =
-                    '<h3><strong>' + unit[0].properties.name + '</strong></h3>' +
-                    '<p><strong><em>' + unit[0].properties.population_sum.toLocaleString('en', {maximumFractionDigits : 0}) + '</strong> people</em></p>' +
-                    '<p><strong><em>' + unit[0].properties.demand_twh_per_year.toLocaleString('en', {maximumFractionDigits : 1}) + '</strong> TWh/a electricity demand</em></p>' +
-                    '<p><strong><em>' + unit[0].properties.normed_potential.toLocaleString('en', {maximumFractionDigits : 2}) + '</strong> normed potential</em></p>';
+                    '<h3>' + unit[0].properties.name + '</h3>' +
+                    '<p><strong>' + unit[0].properties.population_sum.toLocaleString('en', {maximumFractionDigits : 0}) + '</strong> people<br>' +
+                    '<strong>' + unit[0].properties.demand_twh_per_year.toLocaleString('en', {maximumFractionDigits : 1}) + '</strong> TWh/a electricity demand<br>' +
+                    '<strong>' + unit[0].properties.normed_potential.toLocaleString('en', {maximumFractionDigits : 2}) + '</strong> normed potential<br>';
             } else {
                 document.getElementById('pd').innerHTML = '<p>Hover over an area for details</p>';
             }
