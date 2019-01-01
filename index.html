@@ -45,7 +45,17 @@
                 the technical potential of renewable electricity generation. Technical potential is
                 based on technical restrictions only, and the actually feasible potential might be much
                 lower than what we assume here, for example because local administration does not
-                want to use all available land for electricity generation.
+                want to use all available land for electricity generation. Hence we categorise the
+                areas in the following way:
+                <ul>
+                    <li>Autarky is impossible (dark red), when demand exceeds technical potential.</li>
+                    <li>Autarky is likely impossible (light red), when technical potential is less
+                        than twice the demand.</li>
+                    <li>Autarky might be possible (light green), when technical potential is less
+                            than 10 times the demand.</li>
+                    <li>Autarky is likely possible (dark green), when technical potential is more
+                            than 10 times the demand.</li>
+                </ul>
             </p>
             <p>
                 The data is taken from the peer-reviewed article:
@@ -85,6 +95,8 @@
                 var statement = null
                 if (unit[0].properties.normed_potential < 1) {
                     statement = "is impossible"
+                } else if (unit[0].properties.normed_potential < 2) {
+                    statement = "is likely impossible"
                 } else if (unit[0].properties.normed_potential < 10) {
                     statement = "might be possible"
                 } else {
