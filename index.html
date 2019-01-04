@@ -31,6 +31,9 @@
             </a>
         </div>
     </div>
+    <div class='map-overlay' id='legend'>
+        <h2>Autarky is</h2>
+    </div>
     <div class='map-overlay' id="info" onclick="hideInfo()">
         <div id="infotext">
             <h2>Possibility for renewable electricity autarky in Europe</h2>
@@ -116,6 +119,24 @@
 
         map.getCanvas().style.cursor = 'default';
         map.fitBounds([[-15.8, 30], [37, 72]]);
+
+        var layers = ['likely possible', 'maybe possible', 'likely impossible', 'impossible'];
+        var colors = ['hsla(89, 47%, 40%, 0.4)', 'hsla(89, 47%, 40%, 0.2)', 'hsla(2, 78%, 35%, 0.2)', 'hsla(2, 78%, 35%, 0.4)',];
+
+        for (i = 0; i < layers.length; i++) {
+            var layer = layers[i];
+            var color = colors[i];
+            var item = document.createElement('div');
+            var key = document.createElement('span');
+            key.className = 'legend-key';
+            key.style.backgroundColor = color;
+
+            var value = document.createElement('span');
+            value.innerHTML = layer;
+            item.appendChild(key);
+            item.appendChild(value);
+            legend.appendChild(item);
+        }
 
         function showInfo() {
             document.getElementById("info").style.display = "block";
