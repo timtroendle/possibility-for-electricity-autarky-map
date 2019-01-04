@@ -17,12 +17,13 @@
     <div class='map-overlay' id='features'>
         <h2>Renewable electricity autarky</h2>
         <div id='pd'>
-            <p>Hover over an area for details</p>
+            <p>Hover over an area for details.<br>
+            Zoom to switch administrative levels.</p>
         </div>
         <div id='buttons'>
             <div class="tooltip">
                 <i onclick="showInfo()" class="fas fa-info-circle"></i>
-                <span class="tooltiptext">About the data</span>
+                <span class="tooltiptext">About the map</span>
             </div>
             <a class="tooltip" href="https://github.com/timtroendle/possibility-for-electricity-autarky-map/issues/new" target="_blank">
                 <i class="fas fa-flag"></i>
@@ -108,7 +109,7 @@
                     '<strong>' + unit[0].properties.demand_twh_per_year.toLocaleString('en', {maximumFractionDigits : 1}) + '</strong> TWh/a electricity demand<br>' +
                     '<strong>' + potential.toLocaleString('en', {maximumFractionDigits : 1}) + '</strong> TWh/a generation potential<br>';
             } else {
-                document.getElementById('pd').innerHTML = '<p>Hover over an area for details</p>';
+                document.getElementById('pd').innerHTML = '<p>Hover over an area for details.<br>Zoom to switch administrative levels.</p>';
             }
             });
         });
