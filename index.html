@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Possibility for electricity autarky in Europe</title>
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
+    <script src='style.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
     integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
@@ -82,9 +83,12 @@
         mapboxgl.accessToken = 'pk.eyJ1IjoidGltdHJvZW5kbGUiLCJhIjoiY2pxYXRvcHp0M2NidTN4cDMxdXdmZ2VpZSJ9.Yt-BUdLmsq9d4wjDxEWd_g';
         var map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/timtroendle/cjq6mz9h3amlg2smyae8db4py'
+            style: 'mapbox://styles/timtroendle/cjqkrr7ek30xr2rog8cpplm3r'
         });
         map.on('load', function() {
+
+            styleMap(map);
+
             map.on('mousemove', function(e) {
             var unit = map.queryRenderedFeatures(e.point, {
                 layers: ['europe', 'country', 'region', 'municipality']
@@ -121,7 +125,7 @@
         map.fitBounds([[-15.8, 30], [37, 72]]);
 
         var layers = ['likely possible', 'maybe possible', 'likely impossible', 'impossible'];
-        var colors = ['hsla(89, 47%, 40%, 0.4)', 'hsla(89, 47%, 40%, 0.2)', 'hsla(2, 78%, 35%, 0.2)', 'hsla(2, 78%, 35%, 0.4)',];
+        var colors = [COLOR_LIKELY_POSSIBLE, COLOR_MAYBE_POSSIBLE, COLOR_LIKELY_IMPOSSIBLE, COLOR_IMPOSSIBLE];
 
         for (i = 0; i < layers.length; i++) {
             var layer = layers[i];
