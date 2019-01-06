@@ -119,6 +119,26 @@
                 document.getElementById('pd').innerHTML = '<p>Hover over an area for details.<br>Zoom to switch administrative levels.</p>';
             }
             });
+
+            var hoveredStateId =  null;
+            // When the user moves their mouse over the state-fill layer, we'll update the
+            // feature state for the feature under the mouse.
+            map.on("mousemove", "region", function(e) {
+                if (e.features.length > 0) {
+                    if (hoveredStateId) {
+                        map.setFeatureState({source: 'region', sourceLayer: 'merged-results-2jcgj1', id: hoveredStateId}, { hover: false});
+                    }
+                    hoveredStateId = e.features[0].id;
+                    map.setFeatureState({source: 'region', sourceLayer: 'merged-results-2jcgj1', id: hoveredStateId}, { hover: true});
+                }
+            });
+            map.on("mouseleave", "region", function() {
+                if (hoveredStateId) {
+                    map.setFeatureState({source: 'region', sourceLayer: 'merged-results-2jcgj1', id: hoveredStateId}, { hover: false});
+                }
+                hoveredStateId =  null;
+            });
+
         });
 
         map.getCanvas().style.cursor = 'default';
