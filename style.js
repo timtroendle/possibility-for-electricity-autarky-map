@@ -92,6 +92,21 @@ function styleMap(map) {
             "fill-outline-color": COLOR_OUTLINE
         }
     }, firstSymbolId);
+    map.addLayer({
+        "id": "country-thick-outline",
+        "type": "line",
+        "source": {
+            type: 'vector',
+            url: 'mapbox://timtroendle.b2se99fd'
+        },
+        "source-layer": "merged-results-33ke27",
+        "minzoom": 4,
+        "layout": {},
+        "paint": {
+            "line-color": COLOR_OUTLINE,
+            "line-width": ["interpolate", ["linear"], ["zoom"], 4, 0.5, 6, 1, 9, 2]
+        }
+    }, firstSymbolId);
 
     map.setLayoutProperty('admin-2-boundaries', 'visibility', 'none');
     map.setLayoutProperty('admin-2-boundaries-dispute', 'visibility', 'none');
