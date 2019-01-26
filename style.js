@@ -2,10 +2,14 @@ const COLOR_LIKELY_POSSIBLE = 'hsla(89, 47%, 40%, 0.4)';
 const COLOR_MAYBE_POSSIBLE = 'hsla(89, 47%, 40%, 0.2)';
 const COLOR_LIKELY_IMPOSSIBLE = 'hsla(2, 78%, 35%, 0.2)';
 const COLOR_IMPOSSIBLE = 'hsla(2, 78%, 35%, 0.4)'
+const COLOR_MISSING = 'hsla(0, 0%, 0%, 0)'
+const COLOR_OUTLINE = 'hsla(0, 0%, 100%, 1)'
 
 const CONDITIONAL_COLORING = [
     "step",
-    ["get", "normed_potential"],
+    ["coalesce", ["get", "normed_potential"], -1], // catch NaNs
+    COLOR_MISSING,
+    0,
     COLOR_IMPOSSIBLE,
     1,
     COLOR_LIKELY_IMPOSSIBLE,
@@ -36,7 +40,8 @@ function styleMap(map) {
         "maxzoom": 3.5,
         "layout": {},
         "paint": {
-            "fill-color": CONDITIONAL_COLORING
+            "fill-color": CONDITIONAL_COLORING,
+            "fill-outline-color": COLOR_OUTLINE
         }
     }, firstSymbolId);
     map.addLayer({
@@ -53,7 +58,7 @@ function styleMap(map) {
         "paint": {
             "fill-color": CONDITIONAL_COLORING,
             "fill-opacity": 1,
-            "fill-outline-color": "hsl(0, 1%, 100%)"
+            "fill-outline-color": COLOR_OUTLINE
         }
     }, firstSymbolId);
     map.addLayer({
@@ -68,15 +73,7 @@ function styleMap(map) {
         "maxzoom": 9,
         "layout": {},
         "paint": {
-            "fill-outline-color": [
-            "step",
-            ["get", "normed_potential"],
-            "#A01914",
-            1,
-            "hsl(89, 47%, 40%)",
-            13321.236786164578,
-            "#679436"
-            ],
+            "fill-outline-color": COLOR_OUTLINE,
             "fill-color": CONDITIONAL_COLORING
         }
     }, firstSymbolId);
@@ -92,15 +89,7 @@ function styleMap(map) {
         "layout": {},
         "paint": {
             "fill-color": CONDITIONAL_COLORING,
-            "fill-outline-color": [
-                "step",
-                ["get", "normed_potential"],
-                "#a01914",
-                1,
-                "hsl(89, 47%, 40%)",
-                10802090.043295115,
-                "#679436"
-            ]
+            "fill-outline-color": COLOR_OUTLINE
         }
     }, firstSymbolId);
 
