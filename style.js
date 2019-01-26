@@ -1,7 +1,7 @@
-const COLOR_LIKELY_POSSIBLE = 'hsla(89, 47%, 40%, 0.4)';
-const COLOR_MAYBE_POSSIBLE = 'hsla(89, 47%, 40%, 0.2)';
-const COLOR_LIKELY_IMPOSSIBLE = 'hsla(2, 78%, 35%, 0.2)';
-const COLOR_IMPOSSIBLE = 'hsla(2, 78%, 35%, 0.4)'
+const COLOR_LIKELY_POSSIBLE = 'hsla(89, 47%, 40%, 0.6)';
+const COLOR_MAYBE_POSSIBLE = 'hsla(89, 47%, 40%, 0.4)';
+const COLOR_LIKELY_IMPOSSIBLE = 'hsla(2, 78%, 35%, 0.3)';
+const COLOR_IMPOSSIBLE = 'hsla(2, 78%, 35%, 0.5)'
 const COLOR_MISSING = 'hsla(0, 0%, 0%, 0)'
 const COLOR_OUTLINE = 'hsla(0, 0%, 100%, 1)'
 
@@ -107,15 +107,4 @@ function styleMap(map) {
             "line-width": ["interpolate", ["linear"], ["zoom"], 4, 0.5, 6, 1, 9, 2]
         }
     }, firstSymbolId);
-
-    map.setLayoutProperty('admin-2-boundaries', 'visibility', 'none');
-    map.setLayoutProperty('admin-2-boundaries-dispute', 'visibility', 'none');
-    map.setLayoutProperty('admin-2-boundaries-bg', 'visibility', 'none');
-    map.setLayoutProperty('admin-3-4-boundaries', 'visibility', 'none');
-    map.setLayoutProperty('admin-3-4-boundaries-bg', 'visibility', 'none');
-    map.setLayoutProperty('admin-3-4-boundaries', 'visibility', 'none');
-    map.setLayoutProperty('admin-3-4-boundaries-bg', 'visibility', 'none');
-    map.setLayoutProperty('admin-country', 'visibility', 'none');
-    map.setLayoutProperty('admin-country-disputed', 'visibility', 'none');
-    map.setLayoutProperty('admin-state-province', 'visibility', 'none');
 }
