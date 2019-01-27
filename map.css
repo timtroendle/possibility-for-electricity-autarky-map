@@ -48,11 +48,11 @@ p {
 
 a {
     color: #A01914;
-    text-decoration: none
+    text-decoration: none;
 }
 
-a:visited {
-    color: #A01914;
+a:hover {
+    text-decoration: underline;
 }
 
 /**
@@ -122,7 +122,6 @@ a:visited {
     bottom: 0;
     background-color: rgba(0,0,0,0.75);
     z-index: 2;
-    cursor: pointer;
     opacity: 1;
 }
 
@@ -133,6 +132,10 @@ a:visited {
     color: white;
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
+}
+
+#info a {
+    font-weight: bold; /* otherwise not reabable */
 }
 
 /* Tooltip container */
