@@ -85,6 +85,7 @@
             container: 'map',
             style: 'mapbox://styles/timtroendle/cjqhsfrmz0nb82rqcsk6z8po6'
         });
+        map.addControl(new mapboxgl.ScaleControl({unit: 'metric'}));
         map.on('load', function() {
 
             styleMap(map);
