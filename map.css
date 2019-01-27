@@ -2,25 +2,25 @@
     font-family: 'KlinicSlabBook';
     font-style: normal;
     font-weight: normal;
-    src: url(KlinicSlabBook.otf);
+    src: url(./fonts/KlinicSlabBook.otf);
 }
 @font-face {
     font-family: 'KlinicSlabBook';
     font-style: italic;
     font-weight: normal;
-    src: url(KlinicSlabBookIt.otf);
+    src: url(./fonts/KlinicSlabBookIt.otf);
 }
 @font-face {
     font-family: 'KlinicSlabBook';
     font-style: normal;
     font-weight: bold;
-    src: url(KlinicSlabMedium.otf);
+    src: url(./fonts/KlinicSlabMedium.otf);
 }
 @font-face {
     font-family: 'KlinicSlabMedium';
     font-style: normal;
     font-weight: bold;
-    src: url(KlinicSlabMedium.otf);
+    src: url(./fonts/KlinicSlabMedium.otf);
 }
 
 body {
