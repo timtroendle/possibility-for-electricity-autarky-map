@@ -30,13 +30,13 @@ function styleMap(map) {
         }
     }
     map.addLayer({
-        "id": "europe",
+        "id": "continental",
         "type": "fill",
         "source": {
             type: 'vector',
-            url: 'mapbox://timtroendle.91r5pfch'
+            url: 'mapbox://timtroendle.a36mqztf'
         },
-        "source-layer": "merged-results-5c45qb",
+        "source-layer": "continental--technical-potent-1pwjr0",
         "maxzoom": 3.5,
         "layout": {},
         "paint": {
@@ -45,13 +45,13 @@ function styleMap(map) {
         }
     }, firstSymbolId);
     map.addLayer({
-        "id": "country",
+        "id": "national",
         "type": "fill",
         "source": {
             type: 'vector',
-            url: 'mapbox://timtroendle.b2se99fd'
+            url: 'mapbox://timtroendle.b0kevgbl'
         },
-        "source-layer": "merged-results-33ke27",
+        "source-layer": "national--technical-potential-0pjjvc",
         "minzoom": 3.5,
         "maxzoom": 6,
         "layout": {},
@@ -62,13 +62,13 @@ function styleMap(map) {
         }
     }, firstSymbolId);
     map.addLayer({
-        "id": "region",
+        "id": "regional",
         "type": "fill",
         "source": {
             type: 'vector',
-            url: 'mapbox://timtroendle.0dly3483'
+            url: 'mapbox://timtroendle.4gxvq6el'
         },
-        "source-layer": "merged-results-2jcgj1",
+        "source-layer": "regional--technical-potential-7j2cus",
         "minzoom": 6,
         "maxzoom": 9,
         "layout": {},
@@ -78,13 +78,13 @@ function styleMap(map) {
         }
     }, firstSymbolId);
     map.addLayer({
-        "id": "municipality",
+        "id": "municipal",
         "type": "fill",
         "source": {
             type: 'vector',
-            url: 'mapbox://timtroendle.8lu7xodw'
+            url: 'mapbox://timtroendle.ch9inor6'
         },
-        "source-layer": "merged-results-4xkc2x",
+        "source-layer": "municipal-technical-potential-agto8k",
         "minzoom": 9,
         "layout": {},
         "paint": {

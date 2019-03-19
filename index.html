@@ -92,7 +92,7 @@
 
             map.on('mousemove', function(e) {
             var unit = map.queryRenderedFeatures(e.point, {
-                layers: ['europe', 'country', 'region', 'municipality']
+                layers: ['continental', 'national', 'regional', 'municipal']
             });
 
             if (unit.length > 0) {
