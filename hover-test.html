@@ -27,7 +27,7 @@ var hoveredStateId =  null;
 map.on('load', function () {
     map.addSource("states", {
         "type": "vector",
-        "url": "mapbox://timtroendle.b2se99fd"
+        "url": "mapbox://timtroendle.5vygtr2h"
     });
 
     // The feature-state dependent fill-opacity expression will render the hover effect
@@ -36,7 +36,7 @@ map.on('load', function () {
         "id": "state-fills",
         "type": "fill",
         "source": "states",
-        "source-layer": "merged-results-33ke27",
+        "source-layer": "nationaltechnicalpotential",
         "min-zoom": 12,
         "paint": {
             "fill-color": "#627BC1",
@@ -52,10 +52,14 @@ map.on('load', function () {
         "id": "state-borders",
         "type": "line",
         "source": "states",
-        "source-layer": "merged-results-33ke27",
+        "source-layer": "nationaltechnicalpotential",
         "paint": {
             "line-color": "#627BC1",
-            "line-width": 2
+            "line-width": ["case",
+                ["boolean", ["feature-state", "hover"], false],
+                4,
+                1
+            ]
         }
     });
 
@@ -64,10 +68,10 @@ map.on('load', function () {
     map.on("mousemove", "state-fills", function(e) {
         if (e.features.length > 0) {
             if (hoveredStateId) {
-                map.setFeatureState({source: 'states', sourceLayer: "merged-results-33ke27", id: hoveredStateId}, { hover: false});
+                map.setFeatureState({source: 'states', sourceLayer: "nationaltechnicalpotential", id: hoveredStateId}, { hover: false});
             }
             hoveredStateId = e.features[0].id;
-            map.setFeatureState({source: 'states', sourceLayer: "merged-results-33ke27",  id: hoveredStateId}, { hover: true});
+            map.setFeatureState({source: 'states', sourceLayer: "nationaltechnicalpotential",  id: hoveredStateId}, { hover: true});
         }
     });
 
@@ -75,7 +79,7 @@ map.on('load', function () {
     // previously hovered feature.
     map.on("mouseleave", "state-fills", function() {
         if (hoveredStateId != null) {
-            map.setFeatureState({source: 'states', sourceLayer: "merged-results-33ke27", id: hoveredStateId}, { hover: false});
+            map.setFeatureState({source: 'states', sourceLayer: "nationaltechnicalpotential", id: hoveredStateId}, { hover: false});
         }
         hoveredStateId =  null;
     });
