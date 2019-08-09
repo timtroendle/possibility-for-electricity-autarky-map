@@ -1,12 +1,16 @@
-const COLOR_LIKELY_POSSIBLE = 'hsla(89, 47%, 40%, 0.4)';
-const COLOR_MAYBE_POSSIBLE = 'hsla(89, 47%, 40%, 0.2)';
-const COLOR_LIKELY_IMPOSSIBLE = 'hsla(2, 78%, 35%, 0.2)';
-const COLOR_IMPOSSIBLE = 'hsla(2, 78%, 35%, 0.4)';
+const COLOR_LIKELY_POSSIBLE = 'hsla(89, 47%, 40%, 0.6)';
+const COLOR_MAYBE_POSSIBLE = 'hsla(89, 47%, 40%, 0.4)';
+const COLOR_LIKELY_IMPOSSIBLE = 'hsla(2, 78%, 35%, 0.3)';
+const COLOR_IMPOSSIBLE = 'hsla(2, 78%, 35%, 0.5)'
+const COLOR_MISSING = 'hsla(0, 0%, 0%, 0)'
+const COLOR_OUTLINE = 'hsla(0, 0%, 100%, 1)'
 const COLOR_HOVER = 'white';
 
 const CONDITIONAL_COLORING = [
     "step",
-    ["get", "normed_potential"],
+    ["coalesce", ["get", "normed_potential"], -1], // catch NaNs
+    COLOR_MISSING,
+    0,
     COLOR_IMPOSSIBLE,
     1,
     COLOR_LIKELY_IMPOSSIBLE,
@@ -17,7 +21,7 @@ const CONDITIONAL_COLORING = [
 ]
 const CONDITIONAL_BORDER = ["case",
     ["boolean", ["feature-state", "hover"], false],
-    2,
+    3,
     0.0
 ]
 
@@ -31,39 +35,40 @@ function styleMap(map) {
             break;
         }
     }
-    map.addSource("europe", {
+    map.addSource("continental", {
         "type": "vector",
-        "url": "mapbox://timtroendle.91r5pfch"
+        "url": "mapbox://timtroendle.4dejrjjc"
     });
-    map.addSource("country", {
+    map.addSource("national", {
         "type": "vector",
-        "url": "mapbox://timtroendle.b2se99fd"
+        "url": "mapbox://timtroendle.30lyyg8u"
     });
-    map.addSource("region", {
+    map.addSource("regional", {
         "type": "vector",
-        "url": "mapbox://timtroendle.0dly3483"
+        "url": "mapbox://timtroendle.40wfky8r"
     });
-    map.addSource("municipality", {
+    map.addSource("municipal", {
         "type": "vector",
-        "url": "mapbox://timtroendle.8lu7xodw"
+        "url": "mapbox://timtroendle.2b0t5e5j"
     });
 
     map.addLayer({
-        "id": "europe",
+        "id": "continental",
         "type": "fill",
-        "source": 'europe',
-        "source-layer": "merged-results-5c45qb",
+        "source": "continental",
+        "source-layer": "continentaltechnicalpotential",
         "maxzoom": 3.5,
         "layout": {},
         "paint": {
-            "fill-color": CONDITIONAL_COLORING
+            "fill-color": CONDITIONAL_COLORING,
+            "fill-outline-color": COLOR_OUTLINE
         }
     }, firstSymbolId);
     map.addLayer({
-        "id": "europe-borders",
+        "id": "continental-borders",
         "type": "line",
-        "source": 'europe',
-        "source-layer": "merged-results-5c45qb",
+        "source": 'continental',
+        "source-layer": "continentaltechnicalpotential",
         "maxzoom": 3.5,
         "layout": {},
         "paint": {
@@ -72,24 +77,24 @@ function styleMap(map) {
         }
     }, firstSymbolId);
     map.addLayer({
-        "id": "country",
+        "id": "national",
         "type": "fill",
-        "source": 'country',
-        "source-layer": "merged-results-33ke27",
+        "source": "national",
+        "source-layer": "nationaltechnicalpotential",
         "minzoom": 3.5,
         "maxzoom": 6,
         "layout": {},
         "paint": {
             "fill-color": CONDITIONAL_COLORING,
             "fill-opacity": 1,
-            "fill-outline-color": "hsl(0, 1%, 100%)"
+            "fill-outline-color": COLOR_OUTLINE
         }
     }, firstSymbolId);
     map.addLayer({
-        "id": "country-borders",
+        "id": "national-borders",
         "type": "line",
-        "source": 'country',
-        "source-layer": "merged-results-33ke27",
+        "source": 'national',
+        "source-layer": "nationaltechnicalpotential",
         "minzoom": 3.5,
         "maxzoom": 6,
         "layout": {},
@@ -99,31 +104,23 @@ function styleMap(map) {
         }
     }, firstSymbolId);
     map.addLayer({
-        "id": "region",
+        "id": "regional",
         "type": "fill",
-        "source": 'region',
-        "source-layer": "merged-results-2jcgj1",
+        "source": "regional",
+        "source-layer": "regionaltechnicalpotential",
         "minzoom": 6,
         "maxzoom": 9,
         "layout": {},
         "paint": {
-            "fill-outline-color": [
-            "step",
-            ["get", "normed_potential"],
-            "#A01914",
-            1,
-            "hsl(89, 47%, 40%)",
-            13321.236786164578,
-            "#679436"
-            ],
+            "fill-outline-color": COLOR_OUTLINE,
             "fill-color": CONDITIONAL_COLORING
         }
     }, firstSymbolId);
     map.addLayer({
-        "id": "region-borders",
+        "id": "regional-borders",
         "type": "line",
-        "source": 'region',
-        "source-layer": "merged-results-2jcgj1",
+        "source": 'regional',
+        "source-layer": "regionaltechnicalpotential",
         "minzoom": 6,
         "maxzoom": 9,
         "layout": {},
@@ -133,30 +130,22 @@ function styleMap(map) {
         }
     }, firstSymbolId);
     map.addLayer({
-        "id": "municipality",
+        "id": "municipal",
         "type": "fill",
-        "source": 'municipality',
-        "source-layer": "merged-results-4xkc2x",
+        "source": "municipal",
+        "source-layer": "municipaltechnicalpotential",
         "minzoom": 9,
         "layout": {},
         "paint": {
             "fill-color": CONDITIONAL_COLORING,
-            "fill-outline-color": [
-                "step",
-                ["get", "normed_potential"],
-                "#a01914",
-                1,
-                "hsl(89, 47%, 40%)",
-                10802090.043295115,
-                "#679436"
-            ]
+            "fill-outline-color": COLOR_OUTLINE
         }
     }, firstSymbolId);
     map.addLayer({
-        "id": "municipality-borders",
+        "id": "municipal-borders",
         "type": "line",
-        "source": 'municipality',
-        "source-layer": "merged-results-4xkc2x",
+        "source": 'municipal',
+        "source-layer": "municipaltechnicalpotential",
         "minzoom": 9,
         "layout": {},
         "paint": {
@@ -164,15 +153,51 @@ function styleMap(map) {
             "line-width": CONDITIONAL_BORDER
         }
     }, firstSymbolId);
-
-    map.setLayoutProperty('admin-2-boundaries', 'visibility', 'none');
-    map.setLayoutProperty('admin-2-boundaries-dispute', 'visibility', 'none');
-    map.setLayoutProperty('admin-2-boundaries-bg', 'visibility', 'none');
-    map.setLayoutProperty('admin-3-4-boundaries', 'visibility', 'none');
-    map.setLayoutProperty('admin-3-4-boundaries-bg', 'visibility', 'none');
-    map.setLayoutProperty('admin-3-4-boundaries', 'visibility', 'none');
-    map.setLayoutProperty('admin-3-4-boundaries-bg', 'visibility', 'none');
-    map.setLayoutProperty('admin-country', 'visibility', 'none');
-    map.setLayoutProperty('admin-country-disputed', 'visibility', 'none');
-    map.setLayoutProperty('admin-state-province', 'visibility', 'none');
+    map.addLayer({ // different country outlines necessary because levels do not match exactly
+        "id": "country-thick-outline-country",
+        "type": "line",
+        "source": {
+            type: 'vector',
+            url: 'mapbox://timtroendle.0u8aumaa'
+        },
+        "source-layer": "national-boundaries-national--5fk3kj",
+        "minzoom": 4,
+        "maxzoom": 6,
+        "layout": {},
+        "paint": {
+            "line-color": COLOR_OUTLINE,
+            "line-width": ["interpolate", ["linear"], ["zoom"], 4, 0.5, 6, 1, 9, 2]
+        }
+    }, firstSymbolId);
+    map.addLayer({ // different country outlines necessary because levels do not match exactly
+        "id": "country-thick-outline-regional",
+        "type": "line",
+        "source": {
+            type: 'vector',
+            url: 'mapbox://timtroendle.djc7n2y2'
+        },
+        "source-layer": "national-boundaries-regional--0omid4",
+        "minzoom": 6,
+        "maxzoom": 9,
+        "layout": {},
+        "paint": {
+            "line-color": COLOR_OUTLINE,
+            "line-width": ["interpolate", ["linear"], ["zoom"], 4, 0.5, 6, 1, 9, 2]
+        }
+    }, firstSymbolId);
+    map.addLayer({ // different country outlines necessary because levels do not match exactly
+        "id": "country-thick-outline-municipal",
+        "type": "line",
+        "source": {
+            type: 'vector',
+            url: 'mapbox://timtroendle.b0f7q184'
+        },
+        "source-layer": "national-boundaries-municipal-5xb816",
+        "minzoom": 9,
+        "layout": {},
+        "paint": {
+            "line-color": COLOR_OUTLINE,
+            "line-width": ["interpolate", ["linear"], ["zoom"], 4, 0.5, 6, 1, 9, 2]
+        }
+    }, firstSymbolId);
 }

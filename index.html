@@ -41,21 +41,21 @@
             <p>
                 This map visualises the possibility for renewable electricity autarky in Europe ---
                 for all municipalities, all regions, all countries, and all of Europe.
-                Having the possibility means being able to fulfill local electricity demand with
-                100% renewable electricity from wind and solar power generated locally.
+                Having the possibility means <b>being able to fulfill local electricity demand with
+                100% renewable electricity from wind and solar power generated locally</b>.
             </p>
             <p>
                 Areas wont be able to become autarkic when their local electricity demand exceeds
                 the technical potential of renewable electricity generation. Technical potential is
                 based on technical restrictions only, and the actually feasible potential might be much
-                lower than what we assume here, for example because local administration does not
+                lower than the technical potential, for example because local administration does not
                 want to use all available land for electricity generation. Hence we categorise the
                 areas in the following way:
                 <ul>
                     <li>Autarky is impossible (dark red), when demand exceeds technical potential.</li>
                     <li>Autarky is likely impossible (light red), when technical potential is less
                         than twice the demand.</li>
-                    <li>Autarky might be possible (light green), when technical potential is less
+                    <li>Autarky may be possible (light green), when technical potential is less
                             than 10 times the demand.</li>
                     <li>Autarky is likely possible (dark green), when technical potential is more
                             than 10 times the demand.</li>
@@ -75,7 +75,7 @@
                 </a>
             </p>
             <p>
-                © 2018 Tim Tröndle, Renewable Energy Policy Group, ETH Zürich
+                © 2018-2019 Tim Tröndle, Renewable Energy Policy Group, ETH Zürich
             </p>
         </div>
     </div>
@@ -83,15 +83,16 @@
         mapboxgl.accessToken = 'pk.eyJ1IjoidGltdHJvZW5kbGUiLCJhIjoiY2pxYXRvcHp0M2NidTN4cDMxdXdmZ2VpZSJ9.Yt-BUdLmsq9d4wjDxEWd_g';
         var map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/timtroendle/cjqkrr7ek30xr2rog8cpplm3r'
+            style: 'mapbox://styles/timtroendle/cjqhsfrmz0nb82rqcsk6z8po6'
         });
+        map.addControl(new mapboxgl.ScaleControl({unit: 'metric'}));
         map.on('load', function() {
 
             styleMap(map);
 
             map.on('mousemove', function(e) {
             var unit = map.queryRenderedFeatures(e.point, {
-                layers: ['europe', 'country', 'region', 'municipality']
+                layers: ['continental', 'national', 'regional', 'municipal']
             });
 
             if (unit.length > 0) {
@@ -105,7 +106,7 @@
                 } else if (unit[0].properties.normed_potential < 2) {
                     statement = "is likely impossible"
                 } else if (unit[0].properties.normed_potential < 10) {
-                    statement = "might be possible"
+                    statement = "may be possible"
                 } else {
                     statement = "is likely possible"
                 }
