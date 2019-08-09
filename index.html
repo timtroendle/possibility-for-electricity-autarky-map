@@ -120,6 +120,74 @@
                 document.getElementById('pd').innerHTML = '<p>Hover over an area for details.<br>Zoom to switch administrative levels.</p>';
             }
             });
+
+            var hoveredStateContinentId =  null;
+            var hoveredStateNationId =  null;
+            var hoveredStateRegionId =  null;
+            var hoveredStateMunicipalityId =  null;
+            // When the user moves their mouse over the state-fill layer, we'll update the
+            // feature state for the feature under the mouse.
+            map.on("mousemove", "continental", function(e) {
+                if (e.features.length > 0) {
+                    if (hoveredStateContinentId) {
+                        map.setFeatureState({source: 'continental', sourceLayer: 'continentaltechnicalpotential', id: hoveredStateContinentId}, { hover: false});
+                    }
+                    hoveredStateContinentId = e.features[0].id;
+                    map.setFeatureState({source: 'continental', sourceLayer: 'continentaltechnicalpotential', id: hoveredStateContinentId}, { hover: true});
+                }
+            });
+            map.on("mouseleave", "continental", function() {
+                if (hoveredStateContinentId) {
+                    map.setFeatureState({source: 'continental', sourceLayer: 'continentaltechnicalpotential', id: hoveredStateContinentId}, { hover: false});
+                }
+                hoveredStateContinentId =  null;
+            });
+            map.on("mousemove", "national", function(e) {
+                if (e.features.length > 0) {
+                    if (hoveredStateNationId) {
+                        map.setFeatureState({source: 'national', sourceLayer: 'nationaltechnicalpotential', id: hoveredStateNationId}, { hover: false});
+                    }
+                    hoveredStateNationId = e.features[0].id;
+                    map.setFeatureState({source: 'national', sourceLayer: 'nationaltechnicalpotential', id: hoveredStateNationId}, { hover: true});
+                }
+            });
+            map.on("mouseleave", "national", function() {
+                if (hoveredStateNationId) {
+                    map.setFeatureState({source: 'national', sourceLayer: 'nationaltechnicalpotential', id: hoveredStateNationId}, { hover: false});
+                }
+                hoveredStateNationId =  null;
+            });
+            map.on("mousemove", "regional", function(e) {
+                if (e.features.length > 0) {
+                    if (hoveredStateRegionId) {
+                        map.setFeatureState({source: 'regional', sourceLayer: 'regionaltechnicalpotential', id: hoveredStateRegionId}, { hover: false});
+                    }
+                    hoveredStateRegionId = e.features[0].id;
+                    map.setFeatureState({source: 'regional', sourceLayer: 'regionaltechnicalpotential', id: hoveredStateRegionId}, { hover: true});
+                }
+            });
+            map.on("mouseleave", "regional", function() {
+                if (hoveredStateRegionId) {
+                    map.setFeatureState({source: 'regional', sourceLayer: 'regionaltechnicalpotential', id: hoveredStateRegionId}, { hover: false});
+                }
+                hoveredStateRegionId =  null;
+            });
+            map.on("mousemove", "municipal", function(e) {
+                if (e.features.length > 0) {
+                    if (hoveredStateMunicipalityId) {
+                        map.setFeatureState({source: 'municipal', sourceLayer: 'municipaltechnicalpotential', id: hoveredStateMunicipalityId}, { hover: false});
+                    }
+                    hoveredStateMunicipalityId = e.features[0].id;
+                    map.setFeatureState({source: 'municipal', sourceLayer: 'municipaltechnicalpotential', id: hoveredStateMunicipalityId}, { hover: true});
+                }
+            });
+            map.on("mouseleave", "municipal", function() {
+                if (hoveredStateMunicipalityId) {
+                    map.setFeatureState({source: 'municipal', sourceLayer: 'municipaltechnicalpotential', id: hoveredStateMunicipalityId}, { hover: false});
+                }
+                hoveredStateMunicipalityId =  null;
+            });
+
         });
 
         map.getCanvas().style.cursor = 'default';
