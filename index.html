@@ -122,12 +122,19 @@
                 } else {
                     statement = "is likely possible"
                 }
+                energy_unit = "TWh"
+                demand = unit[0].properties.demand_twh_per_year
+                if (potential < 0.1 | demand < 0.1) {
+                    potential = potential * 1000
+                    demand = demand * 1000
+                    energy_unit = "GWh"
+                }
                 document.getElementById('pd').innerHTML =
                     '<p>in <strong>' + unit[0].properties.name + '</strong> ' +
                     statement + '.</p>' +
                     '<p><strong>' + unit[0].properties.population_sum.toLocaleString('en', {maximumFractionDigits : 0}) + '</strong> people<br>' +
-                    '<strong>' + unit[0].properties.demand_twh_per_year.toLocaleString('en', {maximumFractionDigits : 1}) + '</strong> TWh/a electricity demand<br>' +
-                    '<strong>' + potential.toLocaleString('en', {maximumFractionDigits : 1}) + '</strong> TWh/a generation potential<br>';
+                    '<strong>' + demand.toLocaleString('en', {maximumFractionDigits : 1}) + '</strong> ' + energy_unit + ' electricity demand<br>' +
+                    '<strong>' + potential.toLocaleString('en', {maximumFractionDigits : 1}) + '</strong> ' + energy_unit + ' generation potential<br>';
             } else {
                 document.getElementById('pd').innerHTML = '<p>Hover over an area for details.<br>Zoom to switch administrative levels.</p>';
             }
