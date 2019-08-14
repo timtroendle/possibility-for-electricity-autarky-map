@@ -53,24 +53,26 @@
             <p>
                 This map visualises the possibility for renewable electricity autarky in Europe ---
                 for all municipalities, all regions, all countries, and all of Europe.
-                Having the possibility means <b>being able to fulfill local electricity demand with
+                Possibility for autarky means <b>being able to fulfill local electricity demand with
                 100% renewable electricity from wind and solar power generated locally</b>.
             </p>
             <p>
-                Areas wont be able to become autarkic when their local electricity demand exceeds
-                the technical potential of renewable electricity generation. Technical potential is
-                based on technical restrictions only, and the actually feasible potential might be much
-                lower than the technical potential, for example because local administration does not
-                want to use all available land for electricity generation. Hence we categorise the
-                areas in the following way:
+                Areas will not be able to become autarkic when their local electricity demand exceeds
+                the potential of renewable electricity generation. The potential used here
+                is based on technical constraints and some social constraints; for example we do
+                not allow generation on environmentally protected areas and we also prohibit open
+                field solar electricity on arable land. We call this potential the "technical-socal-potential"
+                and you can find the exact definition in our peer-reviewed article, see below.
+                Technically, much more electricity can be generated, and thus we consider autarky
+                impossible only if local electricity demand exceeds a potential based solely on technical
+                constraints:
                 <ul>
+                    <li>Autarky is likely possible (dark green), when the potential exceeds demand.</li>
+                    <li>Autarky may be possible (light green), when demand exceeds the potential,
+                        but technical potential is more than twice the demand.</li>
+                    <li>Autarky is likely impossible (light red), when demand exceeds the potential,
+                        and technical potential is less than twice the demand.</li>
                     <li>Autarky is impossible (dark red), when demand exceeds technical potential.</li>
-                    <li>Autarky is likely impossible (light red), when technical potential is less
-                        than twice the demand.</li>
-                    <li>Autarky may be possible (light green), when technical potential is less
-                            than 10 times the demand.</li>
-                    <li>Autarky is likely possible (dark green), when technical potential is more
-                            than 10 times the demand.</li>
                 </ul>
             </p>
             <p>
@@ -109,22 +111,10 @@
             });
 
             if (unit.length > 0) {
-                var potential = unit[0].properties.offshore_wind_twh_per_year +
-                                unit[0].properties.onshore_wind_twh_per_year +
-                                unit[0].properties.rooftop_pv_twh_per_year +
-                                unit[0].properties.open_field_pv_twh_per_year
-                var statement = null
-                if (unit[0].properties.normed_potential < 1) {
-                    statement = "is impossible"
-                } else if (unit[0].properties.normed_potential < 2) {
-                    statement = "is likely impossible"
-                } else if (unit[0].properties.normed_potential < 10) {
-                    statement = "may be possible"
-                } else {
-                    statement = "is likely possible"
-                }
-                energy_unit = "TWh"
-                demand = unit[0].properties.demand_twh_per_year
+                var potential = unit[0].properties.total_potential_twh_per_year
+                var energy_unit = "TWh"
+                var demand = unit[0].properties.demand_twh_per_year
+                var statement = unit[0].properties.our_rating
                 if (potential < 0.1 | demand < 0.1) {
                     potential = potential * 1000
                     demand = demand * 1000
@@ -150,60 +140,60 @@
             map.on("mousemove", "continental", function(e) {
                 if (e.features.length > 0) {
                     if (hoveredStateContinentId) {
-                        map.setFeatureState({source: 'continental', sourceLayer: 'continentaltechnicalpotential', id: hoveredStateContinentId}, { hover: false});
+                        map.setFeatureState({source: 'continental', sourceLayer: 'continentaltechnicalsocialpotential', id: hoveredStateContinentId}, { hover: false});
                     }
                     hoveredStateContinentId = e.features[0].id;
-                    map.setFeatureState({source: 'continental', sourceLayer: 'continentaltechnicalpotential', id: hoveredStateContinentId}, { hover: true});
+                    map.setFeatureState({source: 'continental', sourceLayer: 'continentaltechnicalsocialpotential', id: hoveredStateContinentId}, { hover: true});
                 }
             });
             map.on("mouseleave", "continental", function() {
                 if (hoveredStateContinentId) {
-                    map.setFeatureState({source: 'continental', sourceLayer: 'continentaltechnicalpotential', id: hoveredStateContinentId}, { hover: false});
+                    map.setFeatureState({source: 'continental', sourceLayer: 'continentaltechnicalsocialpotential', id: hoveredStateContinentId}, { hover: false});
                 }
                 hoveredStateContinentId =  null;
             });
             map.on("mousemove", "national", function(e) {
                 if (e.features.length > 0) {
                     if (hoveredStateNationId) {
-                        map.setFeatureState({source: 'national', sourceLayer: 'nationaltechnicalpotential', id: hoveredStateNationId}, { hover: false});
+                        map.setFeatureState({source: 'national', sourceLayer: 'nationaltechnicalsocialpotential', id: hoveredStateNationId}, { hover: false});
                     }
                     hoveredStateNationId = e.features[0].id;
-                    map.setFeatureState({source: 'national', sourceLayer: 'nationaltechnicalpotential', id: hoveredStateNationId}, { hover: true});
+                    map.setFeatureState({source: 'national', sourceLayer: 'nationaltechnicalsocialpotential', id: hoveredStateNationId}, { hover: true});
                 }
             });
             map.on("mouseleave", "national", function() {
                 if (hoveredStateNationId) {
-                    map.setFeatureState({source: 'national', sourceLayer: 'nationaltechnicalpotential', id: hoveredStateNationId}, { hover: false});
+                    map.setFeatureState({source: 'national', sourceLayer: 'nationaltechnicalsocialpotential', id: hoveredStateNationId}, { hover: false});
                 }
                 hoveredStateNationId =  null;
             });
             map.on("mousemove", "regional", function(e) {
                 if (e.features.length > 0) {
                     if (hoveredStateRegionId) {
-                        map.setFeatureState({source: 'regional', sourceLayer: 'regionaltechnicalpotential', id: hoveredStateRegionId}, { hover: false});
+                        map.setFeatureState({source: 'regional', sourceLayer: 'regionaltechnicalsocialpotential', id: hoveredStateRegionId}, { hover: false});
                     }
                     hoveredStateRegionId = e.features[0].id;
-                    map.setFeatureState({source: 'regional', sourceLayer: 'regionaltechnicalpotential', id: hoveredStateRegionId}, { hover: true});
+                    map.setFeatureState({source: 'regional', sourceLayer: 'regionaltechnicalsocialpotential', id: hoveredStateRegionId}, { hover: true});
                 }
             });
             map.on("mouseleave", "regional", function() {
                 if (hoveredStateRegionId) {
-                    map.setFeatureState({source: 'regional', sourceLayer: 'regionaltechnicalpotential', id: hoveredStateRegionId}, { hover: false});
+                    map.setFeatureState({source: 'regional', sourceLayer: 'regionaltechnicalsocialpotential', id: hoveredStateRegionId}, { hover: false});
                 }
                 hoveredStateRegionId =  null;
             });
             map.on("mousemove", "municipal", function(e) {
                 if (e.features.length > 0) {
                     if (hoveredStateMunicipalityId) {
-                        map.setFeatureState({source: 'municipal', sourceLayer: 'municipaltechnicalpotential', id: hoveredStateMunicipalityId}, { hover: false});
+                        map.setFeatureState({source: 'municipal', sourceLayer: 'municipaltechnicalsocialpotential', id: hoveredStateMunicipalityId}, { hover: false});
                     }
                     hoveredStateMunicipalityId = e.features[0].id;
-                    map.setFeatureState({source: 'municipal', sourceLayer: 'municipaltechnicalpotential', id: hoveredStateMunicipalityId}, { hover: true});
+                    map.setFeatureState({source: 'municipal', sourceLayer: 'municipaltechnicalsocialpotential', id: hoveredStateMunicipalityId}, { hover: true});
                 }
             });
             map.on("mouseleave", "municipal", function() {
                 if (hoveredStateMunicipalityId) {
-                    map.setFeatureState({source: 'municipal', sourceLayer: 'municipaltechnicalpotential', id: hoveredStateMunicipalityId}, { hover: false});
+                    map.setFeatureState({source: 'municipal', sourceLayer: 'municipaltechnicalsocialpotential', id: hoveredStateMunicipalityId}, { hover: false});
                 }
                 hoveredStateMunicipalityId =  null;
             });

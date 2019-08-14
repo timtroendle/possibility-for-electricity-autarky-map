@@ -7,17 +7,17 @@ const COLOR_OUTLINE = 'hsla(0, 0%, 100%, 1)'
 const COLOR_HOVER = 'white';
 
 const CONDITIONAL_COLORING = [
-    "step",
-    ["coalesce", ["get", "normed_potential"], -1], // catch NaNs
-    COLOR_MISSING,
-    0,
+    "match",
+    ["get", "our_rating"],
+    "is impossible",
     COLOR_IMPOSSIBLE,
-    1,
+    "is likely impossible",
     COLOR_LIKELY_IMPOSSIBLE,
-    2,
+    "is maybe possible",
     COLOR_MAYBE_POSSIBLE,
-    10,
-    COLOR_LIKELY_POSSIBLE
+    "is likely possible",
+    COLOR_LIKELY_POSSIBLE,
+    COLOR_MISSING
 ]
 const CONDITIONAL_BORDER = ["case",
     ["boolean", ["feature-state", "hover"], false],
@@ -37,26 +37,26 @@ function styleMap(map) {
     }
     map.addSource("continental", {
         "type": "vector",
-        "url": "mapbox://timtroendle.4dejrjjc"
+        "url": "mapbox://timtroendle.8p5jv6p0"
     });
     map.addSource("national", {
         "type": "vector",
-        "url": "mapbox://timtroendle.30lyyg8u"
+        "url": "mapbox://timtroendle.bena6hoy"
     });
     map.addSource("regional", {
         "type": "vector",
-        "url": "mapbox://timtroendle.40wfky8r"
+        "url": "mapbox://timtroendle.38ibxh4r"
     });
     map.addSource("municipal", {
         "type": "vector",
-        "url": "mapbox://timtroendle.2b0t5e5j"
+        "url": "mapbox://timtroendle.a0731wai"
     });
 
     map.addLayer({
         "id": "continental",
         "type": "fill",
         "source": "continental",
-        "source-layer": "continentaltechnicalpotential",
+        "source-layer": "continentaltechnicalsocialpotential",
         "maxzoom": 3.5,
         "layout": {},
         "paint": {
@@ -68,7 +68,7 @@ function styleMap(map) {
         "id": "continental-borders",
         "type": "line",
         "source": 'continental',
-        "source-layer": "continentaltechnicalpotential",
+        "source-layer": "continentaltechnicalsocialpotential",
         "maxzoom": 3.5,
         "layout": {},
         "paint": {
@@ -80,7 +80,7 @@ function styleMap(map) {
         "id": "national",
         "type": "fill",
         "source": "national",
-        "source-layer": "nationaltechnicalpotential",
+        "source-layer": "nationaltechnicalsocialpotential",
         "minzoom": 3.5,
         "maxzoom": 6,
         "layout": {},
@@ -94,7 +94,7 @@ function styleMap(map) {
         "id": "national-borders",
         "type": "line",
         "source": 'national',
-        "source-layer": "nationaltechnicalpotential",
+        "source-layer": "nationaltechnicalsocialpotential",
         "minzoom": 3.5,
         "maxzoom": 6,
         "layout": {},
@@ -107,7 +107,7 @@ function styleMap(map) {
         "id": "regional",
         "type": "fill",
         "source": "regional",
-        "source-layer": "regionaltechnicalpotential",
+        "source-layer": "regionaltechnicalsocialpotential",
         "minzoom": 6,
         "maxzoom": 9,
         "layout": {},
@@ -120,7 +120,7 @@ function styleMap(map) {
         "id": "regional-borders",
         "type": "line",
         "source": 'regional',
-        "source-layer": "regionaltechnicalpotential",
+        "source-layer": "regionaltechnicalsocialpotential",
         "minzoom": 6,
         "maxzoom": 9,
         "layout": {},
@@ -133,7 +133,7 @@ function styleMap(map) {
         "id": "municipal",
         "type": "fill",
         "source": "municipal",
-        "source-layer": "municipaltechnicalpotential",
+        "source-layer": "municipaltechnicalsocialpotential",
         "minzoom": 9,
         "layout": {},
         "paint": {
@@ -145,7 +145,7 @@ function styleMap(map) {
         "id": "municipal-borders",
         "type": "line",
         "source": 'municipal',
-        "source-layer": "municipaltechnicalpotential",
+        "source-layer": "municipaltechnicalsocialpotential",
         "minzoom": 9,
         "layout": {},
         "paint": {
