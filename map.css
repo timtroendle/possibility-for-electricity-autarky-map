@@ -142,6 +142,8 @@ a:hover {
 .tooltip {
     position: relative;
     display: inline-block;
+    cursor: pointer;
+    color: hsla(89, 47%, 40%, 1);
 }
 
 /* Tooltip text */
