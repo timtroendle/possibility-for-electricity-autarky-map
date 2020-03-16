@@ -34,6 +34,13 @@ body {
 h1, h2, h3 {
     margin-top: 0em;
     margin-bottom: 0.4em;
+}
+
+h1 {
+    font-size: x-large;
+}
+
+h2 {
     font-size: large;
 }
 
