@@ -18,14 +18,22 @@
     <div class='map-overlay' id='features'>
         <h2>Renewable electricity autarky</h2>
         <div id='pd'>
-            <p>Hover over an area for details.<br>
-            Zoom to switch administrative levels.</p>
+            <p>
+                Hover over an area for details.<br>
+                Zoom to switch administrative levels.<br>
+                Click on
+                <a class="tooltip">
+                    <i onclick="showInfo()" class="fas fa-info-circle"></i>
+                    <span class="tooltiptext">About the map</span>
+                </a>
+                for more information.<br>
+            </p>
         </div>
         <div id='buttons'>
-            <div class="tooltip">
+            <a class="tooltip">
                 <i onclick="showInfo()" class="fas fa-info-circle"></i>
                 <span class="tooltiptext">About the map</span>
-            </div>
+            </a>
             <a class="tooltip" href="https://doi.org/10.1016/j.esr.2019.100388" target="_blank">
                 <i class="fas fa-book-open"></i>
                 <span class="tooltiptext">Read publication</span>
@@ -127,7 +135,17 @@
                     '<strong>' + demand.toLocaleString('en', {maximumFractionDigits : 1}) + '</strong> ' + energy_unit + ' electricity demand<br>' +
                     '<strong>' + potential.toLocaleString('en', {maximumFractionDigits : 1}) + '</strong> ' + energy_unit + ' generation potential<br>';
             } else {
-                document.getElementById('pd').innerHTML = '<p>Hover over an area for details.<br>Zoom to switch administrative levels.</p>';
+                document.getElementById('pd').innerHTML = `
+                <p>
+                    Hover over an area for details.<br>
+                    Zoom to switch administrative levels.<br>
+                    Click on
+                    <a class="tooltip">
+                        <i onclick="showInfo()" class="fas fa-info-circle"></i>
+                        <span class="tooltiptext">About the map</span>
+                    </a>
+                    for more information.<br>
+                </p>`;
             }
             });
 

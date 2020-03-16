@@ -56,6 +56,10 @@ a:hover {
     text-decoration: underline;
 }
 
+.fa-info-circle {
+    color: hsla(89, 47%, 40%, 1);
+}
+
 /**
 * Create a position for the map
 * on the page */
