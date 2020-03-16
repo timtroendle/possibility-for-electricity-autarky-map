@@ -31,18 +31,19 @@ body {
     font-size: normal;
 }
 
-h1, h2 {
-    margin: 10px;
+h1, h2, h3 {
+    margin-top: 0em;
+    margin-bottom: 0.4em;
     font-size: large;
 }
 
 h3 {
-    margin: 10px;
     font-size: normal;
 }
 
 p {
-    margin: 10px;
+    margin-top: 0em;
+    margin-bottom: 0.4em;
     text-align: left;
 }
 
@@ -70,7 +71,6 @@ a:hover {
 * will be displayed on the page. */
 .map-overlay {
     position: absolute;
-    bottom: 0;
     right: 0;
     background: rgba(255, 255, 255, 0.8);
     margin-right: 20px;
@@ -80,14 +80,17 @@ a:hover {
 }
 
 #features {
+    max-height: 50%;
+    max-width: 50%;
     top: 0;
-    height: 180px;
     margin-top: 20px;
-    width: 300px;
+    width: 18em;
+    padding: 0.6em;
 }
 
 #legend {
-    padding: 10px;
+    bottom: 0;
+    padding: 1em;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     line-height: 18px;
     height: auto;
@@ -98,17 +101,17 @@ a:hover {
 .legend-key {
     display: inline-block;
     border-radius: 20%;
-    width: 10px;
-    height: 10px;
+    width: 0.5em;
+    height: 0.5em;
     margin-right: 5px;
 }
 
 #pd {
-    height: 110px;
+    min-height: 6.5em;
 }
 
 #buttons {
-    margin-left: 15px;
+    height: 1em;
 }
 
 #info {
@@ -120,18 +123,19 @@ a:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.75);
+    background-color: rgba(0,0,0,0.80);
     z-index: 2;
     opacity: 1;
 }
 
 #infotext{
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    position: relative;
+    left: 10%;
+    padding-top: 5em;
+    padding-bottom: 5em;
+    position: center;
+    max-width: 60%;
     color: white;
-    transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
 }
 
 #info a {
