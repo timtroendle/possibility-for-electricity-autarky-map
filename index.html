@@ -18,14 +18,22 @@
     <div class='map-overlay' id='features'>
         <h2>Renewable electricity autarky</h2>
         <div id='pd'>
-            <p>Hover over an area for details.<br>
-            Zoom to switch administrative levels.</p>
+            <p>
+                Hover over an area for details.<br>
+                Zoom to switch administrative levels.<br>
+                Click on
+                <a class="tooltip">
+                    <i onclick="showInfo()" class="fas fa-info-circle"></i>
+                    <span class="tooltiptext">About the map</span>
+                </a>
+                for more information.<br>
+            </p>
         </div>
         <div id='buttons'>
-            <div class="tooltip">
+            <a class="tooltip">
                 <i onclick="showInfo()" class="fas fa-info-circle"></i>
                 <span class="tooltiptext">About the map</span>
-            </div>
+            </a>
             <a class="tooltip" href="https://doi.org/10.1016/j.esr.2019.100388" target="_blank">
                 <i class="fas fa-book-open"></i>
                 <span class="tooltiptext">Read publication</span>
@@ -49,39 +57,85 @@
     </div>
     <div class='map-overlay' id="info" onclick="hideInfo()">
         <div id="infotext">
-            <h2>Possibility for renewable electricity autarky in Europe</h2>
+            <h1>Can sun and wind provide all electricity needed in your European country, region, or municipality?</h1>
             <p>
-                This map visualises the possibility for renewable electricity autarky in Europe ---
+                This map visualises the possibility for renewable electricity autarky in Europe &mdash;
                 for all municipalities, all regions, all countries, and all of Europe.
-                Possibility for autarky means <b>being able to fulfill local electricity demand with
-                100% renewable electricity from wind and solar power generated locally</b>.
+                No matter where you live, here you can find out whether enough electricity from
+                sun and wind can be generated in your region.
+            </p>
+            <h2>But what does it mean to be autarkic?</h2>
+            <p>
+                Possibility for autarky means being able to fulfil local electricity demand with
+                100% renewable electricity from solar and wind power generated locally.
+                It makes it possible for entire communities to produce their own electricity &mdash; for
+                example using solar systems on the roofs and community wind farms &mdash; and then consume it.
+            </p>
+            <h2>Can Europe be powered by sun and wind alone?</h2>
+            <p>
+                The potential of solar and wind energy is large enough to supply Europe with 100%
+                renewable electricity. In many cases at regional or municipal level, autarky is
+                possible using renewable electricity only. However, some densely populated
+                metropolis will not be able to supply themselves with 100% renewable electricity.
+                A possible solution for these places is to import electricity from the surrounding
+                region.
+            </p>
+            <h2>What does the map show me?</h2>
+            <p>
+                The map shows the potential for renewable electricity autarky in Europe for
+                individual countries, regions and municipalities. The potential shown is based on
+                technical and some social constraints: for example, we do not allow electricity to be
+                produced in nature conservation areas and we also prohibit open field solar
+                systems on arable land. Therefore, we call this potential the “technical-social
+                potential”. You can find more information in our scientific article (information below).
             </p>
             <p>
-                Areas will not be able to become autarkic when their local electricity demand exceeds
-                the potential of renewable electricity generation. The potential used here
-                is based on technical constraints and some social constraints; for example we do
-                not allow generation on environmentally protected areas and we also prohibit open
-                field solar electricity on arable land. We call this potential the "technical-socal-potential"
-                and you can find the exact definition in our peer-reviewed article, see below.
-                Technically, much more electricity can be generated, and thus we consider autarky
-                impossible only if local electricity demand exceeds a potential based solely on technical
-                constraints:
+                We use different colours to represent the possibility for electricity autarky.
+                We consider autarky here as impossible only if local electricity
+                demand exceeds the technical potential:
                 <ul>
-                    <li>Autarky is likely possible (dark green), when the potential exceeds demand.</li>
-                    <li>Autarky may be possible (light green), when demand exceeds the potential,
-                        but technical potential is more than twice the demand.</li>
-                    <li>Autarky is likely impossible (light red), when demand exceeds the potential,
-                        and technical potential is less than twice the demand.</li>
-                    <li>Autarky is impossible (dark red), when demand exceeds technical potential.</li>
+                    <li>
+                        Autarky is likely possible (dark green), when the potential exceeds demand.
+                    </li>
+                    <li>
+                        Autarky may be possible (light green), when demand exceeds the potential,
+                        but technical potential is more than twice the demand.
+                    </li>
+                    <li>
+                        Autarky is likely impossible (light red), when demand exceeds the potential,
+                        and technical potential is less than twice the demand.
+                    </li>
+                    <li>
+                        Autarky is impossible (dark red), when demand exceeds technical potential.
+                    </li>
                 </ul>
             </p>
+            <h2>How do I use the map?</h2>
+            <p>
+                You can zoom in and out to find out about the potential of renewable electricity
+                generation and whether an area can supply itself with it.
+                Depending on the area you look at, you will notice that the colour of the area may
+                change: from dark green &mdash; areas in which autarky is likely &mdash; to dark red
+                &mdash; areas in which autarky is not possible. If you hoover over the area of your
+                choice, you will receive further information in the top right box: You will
+                see whether electrical autarky is possible. You can also see how many people
+                live there, how much electricity they need, and the potential to generate
+                electricity from sun and wind. Have fun trying it out!
+            </p>
+            <h2>Where do I get more information about the project?</h2>
             <p>
                 The data is taken from the peer-reviewed article:
-                <q>Tröndle, T., Pfenninger, S., Lilliestam, J., 2019. Home-made or imported: on the
-                possibility for renewable electricity autarky on all scales in Europe. Energy
-                Strategy Reviews 26.
-                <a href=https://doi.org/10.1016/j.esr.2019.100388>https://doi.org/10.1016/j.esr.2019.100388</a></q>.
-                <b>If you make use of the data in academic work, please cite the article.</b>
+                 <a href=https://doi.org/10.1016/j.esr.2019.100388>
+                    Tröndle, T., Pfenninger, S., Lilliestam, J., 2019. Home-made or imported:
+                    on the possibility for renewable electricity autarky on all scales in Europe.
+                    Energy Strategy Reviews 26.
+                </a>. <strong>If you make use of the data in academic work, please cite the article.</strong>
+
+                You can find out more about us and the research of our working group
+                Energy Transition Dynamics at the Institute for Advanced Sustainability Studies (IASS) Potsdam
+                <a href=https://www.iass-potsdam.de/en/research-group/energy-transition-dynamics>
+                    on our website
+                </a>.
             </p>
             <p>
                 Did you find an issue in the data? Please
@@ -90,7 +144,7 @@
                 </a>
             </p>
             <p>
-                © 2018-2019 Tim Tröndle, Institute for Advanced Sustainability Studies Potsdam and Institute for Environmental Decisions, ETH Zürich
+                © 2018-2020 Tim Tröndle, Institute for Advanced Sustainability Studies Potsdam and Institute for Environmental Decisions, ETH Zürich
             </p>
         </div>
     </div>
@@ -127,7 +181,17 @@
                     '<strong>' + demand.toLocaleString('en', {maximumFractionDigits : 1}) + '</strong> ' + energy_unit + ' electricity demand<br>' +
                     '<strong>' + potential.toLocaleString('en', {maximumFractionDigits : 1}) + '</strong> ' + energy_unit + ' generation potential<br>';
             } else {
-                document.getElementById('pd').innerHTML = '<p>Hover over an area for details.<br>Zoom to switch administrative levels.</p>';
+                document.getElementById('pd').innerHTML = `
+                <p>
+                    Hover over an area for details.<br>
+                    Zoom to switch administrative levels.<br>
+                    Click on
+                    <a class="tooltip">
+                        <i onclick="showInfo()" class="fas fa-info-circle"></i>
+                        <span class="tooltiptext">About the map</span>
+                    </a>
+                    for more information.<br>
+                </p>`;
             }
             });
 
