@@ -166,13 +166,13 @@
 
             if (unit.length > 0) {
                 var potential = unit[0].properties.total_potential_twh_per_year
-                var energy_unit = "TWh"
+                var energy_unit = "TWh/yr"
                 var demand = unit[0].properties.demand_twh_per_year
                 var statement = unit[0].properties.our_rating
                 if (potential < 0.1 | demand < 0.1) {
                     potential = potential * 1000
                     demand = demand * 1000
-                    energy_unit = "GWh"
+                    energy_unit = "GWh/yr"
                 }
                 document.getElementById('pd').innerHTML =
                     '<p>in <strong>' + unit[0].properties.name + '</strong> ' +
