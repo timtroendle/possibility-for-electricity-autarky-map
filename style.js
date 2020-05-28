@@ -4,6 +4,7 @@ const COLOR_LIKELY_IMPOSSIBLE = 'hsla(2, 78%, 35%, 0.3)';
 const COLOR_IMPOSSIBLE = 'hsla(2, 78%, 35%, 0.5)'
 const COLOR_MISSING = 'hsla(0, 0%, 0%, 0)'
 const COLOR_OUTLINE = 'hsla(0, 0%, 100%, 1)'
+const COLOR_OUTLINE_HIGH_ZOOM = 'hsla(0, 0%, 100%, 0.6)'
 const COLOR_HOVER = 'white';
 
 const CONDITIONAL_COLORING = [
@@ -181,7 +182,7 @@ function styleMap(map) {
         "layout": {},
         "paint": {
             "fill-color": CONDITIONAL_COLORING,
-            "fill-outline-color": COLOR_OUTLINE
+            "fill-outline-color": COLOR_OUTLINE_HIGH_ZOOM
         }
     }, firstSymbolId);
     map.addLayer({
