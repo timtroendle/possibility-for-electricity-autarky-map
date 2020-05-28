@@ -24,10 +24,52 @@ const CONDITIONAL_BORDER = ["case",
     3,
     0.0
 ]
+TEXT_COLOR_HIGH_ZOOM = "hsl(0, 0%, 34%)"
+const CONDITIONAL_TEXT_COLOR_CITY = [
+    "interpolate",
+    ["exponential", 1],
+    ["zoom"],
+    6,
+    "hsl(0, 0%, 42%)",
+    9,
+    TEXT_COLOR_HIGH_ZOOM
+]
+const CONDITIONAL_TEXT_COLOR_TOWN = {
+    "base": 1,
+    "stops": [
+      [8, "hsl(0, 0%, 62%)"],
+      [9, TEXT_COLOR_HIGH_ZOOM]
+    ]
+}
+const CONDITIONAL_TEXT_COLOR_VILLAGE = {
+    "base": 1,
+    "stops": [
+      [10, "hsl(0, 0%, 62%)"],
+      [11, TEXT_COLOR_HIGH_ZOOM]
+    ]
+}
+const HIGH_ZOOM_TEXT_LAYERS = [
+    'place-hamlet',
+    'place-suburb',
+    'place-neighbourhood',
+    'place-islets-archipelago-aboriginal',
+    'place-islands',
+]
 
 function styleMap(map) {
-    var layers = map.getStyle().layers;
+    // Increase font contrast on high zoom levels
+    map.setPaintProperty('place-city-lg-n', 'text-color', CONDITIONAL_TEXT_COLOR_CITY);
+    map.setPaintProperty('place-city-lg-s', 'text-color', CONDITIONAL_TEXT_COLOR_CITY);
+    map.setPaintProperty('place-city-md-n', 'text-color', CONDITIONAL_TEXT_COLOR_CITY);
+    map.setPaintProperty('place-city-md-s', 'text-color', CONDITIONAL_TEXT_COLOR_CITY);
+    map.setPaintProperty('place-city-sm', 'text-color', CONDITIONAL_TEXT_COLOR_CITY);
+    map.setPaintProperty('place-town', 'text-color', CONDITIONAL_TEXT_COLOR_TOWN);
+    map.setPaintProperty('place-village', 'text-color', CONDITIONAL_TEXT_COLOR_VILLAGE);
+    for (var i = 0; i < HIGH_ZOOM_TEXT_LAYERS.length; i++) {
+        map.setPaintProperty(HIGH_ZOOM_TEXT_LAYERS[i], 'text-color', TEXT_COLOR_HIGH_ZOOM);
+    }
     // Find the index of the first symbol layer in the map style
+    var layers = map.getStyle().layers;
     var firstSymbolId;
     for (var i = 0; i < layers.length; i++) {
         if (layers[i].type === 'symbol') {
@@ -35,6 +77,7 @@ function styleMap(map) {
             break;
         }
     }
+    // Add data layers
     map.addSource("continental", {
         "type": "vector",
         "url": "mapbox://timtroendle.8p5jv6p0"
